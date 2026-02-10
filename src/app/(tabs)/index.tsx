@@ -1,5 +1,5 @@
 import { Image } from 'expo-image';
-import { StyleSheet, useColorScheme } from 'react-native';
+import { ActivityIndicator, StyleSheet, useColorScheme } from 'react-native';
 
 import { ExternalLink } from '@/src/components/external-link';
 import { HelloWave } from '@/src/components/hello-wave';
@@ -8,18 +8,20 @@ import { ThemedList } from '@/src/components/themed-list';
 import { ThemedText } from '@/src/components/themed-text';
 import { ThemedView } from '@/src/components/themed-view';
 import { skills, techStack } from '@/src/constants/general';
-import { useIsLargeScreen } from '@/src/data/hooks/use-different-screens';
 import { Ionicons } from '@expo/vector-icons';
+import { useFonts } from 'expo-font';
 import { Link } from 'expo-router';
 
 export default function HomeScreen() {
-    const isLargeScreen = useIsLargeScreen();
+    const [fontsLoaded] = useFonts({
+        ...Ionicons.font,
+    });
     const colorScheme = useColorScheme();
     return (
     <ParallaxScrollView
         headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
         headerImage={
-            <Ionicons name="person" size={310} style={styles.headerImage}/>     
+            fontsLoaded ? <Ionicons name="person" size={310} style={styles.headerImage}/> : <ActivityIndicator style={styles.headerImage} />    
         }>
         <ThemedView style={styles.titleContainer}>
             <ThemedText type="title">Gabriel Chouinard-Letourneau</ThemedText>
@@ -57,7 +59,7 @@ export default function HomeScreen() {
         <ThemedView style={styles.stepContainer}>
             <ThemedText type="subtitle">Contact</ThemedText>
             <ThemedText style={styles.contactContainer}>
-                <Ionicons name="at" color={colorScheme === 'dark' ? '#FFFFFF' : '#000000'} size={32} />
+                {fontsLoaded ?? <Ionicons name="at" color={colorScheme === 'dark' ? '#FFFFFF' : '#000000'} size={32} />}
                 <ThemedText type="link" style={styles.linkContactContainer}>  
                     <Link href="mailto:chouinardletourneaug@gmail.com" style={styles.linkContact}>
                         chouinardletourneaug@gmail.com

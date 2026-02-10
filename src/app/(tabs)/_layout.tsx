@@ -7,10 +7,11 @@ import { copyFile } from '@/src/utils/copyFile';
 import { Ionicons } from '@expo/vector-icons';
 import { Asset } from 'expo-asset';
 import documentDirectory from 'expo-file-system';
+import { useFonts } from 'expo-font';
 import { Tabs } from 'expo-router';
 import * as Sharing from 'expo-sharing';
 import React from 'react';
-import { Alert, Platform, StyleSheet, TouchableOpacity } from 'react-native';
+import { ActivityIndicator, Alert, Platform, StyleSheet, TouchableOpacity } from 'react-native';
 
 
 const downloadAndOpenPDF = async () => {
@@ -70,7 +71,9 @@ const DownloadResumeButton = (isLargeScreen: boolean) => {
 export default function TabLayout() {
   const colorScheme = useColorScheme();
   const { isLargeScreen, isBigScreen } = useIsLargeScreen();
-  
+  const [fontsLoaded] = useFonts({
+    ...Ionicons.font,
+  });
   return (
     <Tabs
       screenOptions={{
@@ -94,14 +97,14 @@ export default function TabLayout() {
         name="index"
         options={{
           title: 'About me',
-          tabBarIcon: ({ color }) => <Ionicons name="person" size={32} color={color} />,
+          tabBarIcon: ({ color }) => fontsLoaded ? <Ionicons name="person" size={32} color={color} /> : <ActivityIndicator size={32} color={color} />,
         }}
       />
       <Tabs.Screen
         name="experience"
         options={{
           title: 'Experience',
-          tabBarIcon: ({ color }) => <Ionicons name="briefcase" size={32} color={color} />,
+          tabBarIcon: ({ color }) => fontsLoaded ? <Ionicons name="briefcase" size={32} color={color} /> : <ActivityIndicator size={32} color={color} />,
           tabBarItemStyle: isLargeScreen ? styles.pushDownloadButton : styles.defaultMobileTabBarStyle,
         }}
       />
