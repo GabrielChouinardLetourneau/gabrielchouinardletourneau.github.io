@@ -72,7 +72,7 @@ export default function TabLayout() {
   const colorScheme = useColorScheme();
   const { isLargeScreen, isBigScreen } = useIsLargeScreen();
   const [fontsLoaded] = useFonts({
-    Ionicons: require('@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Ionicons.ttf'),
+    Ionicons: require('@/assets/fonts/Ionicons.ttf'),
   });
   return (
     <Tabs
