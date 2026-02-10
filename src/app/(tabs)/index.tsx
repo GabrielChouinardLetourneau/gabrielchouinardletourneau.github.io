@@ -59,7 +59,7 @@ export default function HomeScreen() {
         <ThemedView style={styles.stepContainer}>
             <ThemedText type="subtitle">Contact</ThemedText>
             <ThemedText style={styles.contactContainer}>
-                {fontsLoaded ?? <Ionicons name="at" color={colorScheme === 'dark' ? '#FFFFFF' : '#000000'} size={32} />}
+                {fontsLoaded ? <Ionicons name="at" color={colorScheme === 'dark' ? '#FFFFFF' : '#000000'} size={32} /> : <ActivityIndicator size={32} />}
                 <ThemedText type="link" style={styles.linkContactContainer}>  
                     <Link href="mailto:chouinardletourneaug@gmail.com" style={styles.linkContact}>
                         chouinardletourneaug@gmail.com
