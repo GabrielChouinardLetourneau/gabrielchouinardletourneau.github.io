@@ -22,7 +22,6 @@ export default function AboutScreen() {
         <Ionicons 
           name="briefcase" 
           size={310} 
-          color="#808080"
           style={styles.headerImage} />
       }
     >

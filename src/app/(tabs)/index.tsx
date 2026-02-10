@@ -19,15 +19,19 @@ export default function HomeScreen() {
     <ParallaxScrollView
         headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
         headerImage={
-        <Image
-            source={require('../../../assets/images/gcl.jpg')}
-            style={styles.reactLogo}
-        />
+            <Ionicons name="person" size={310} style={styles.headerImage}/>     
         }>
         <ThemedView style={styles.titleContainer}>
             <ThemedText type="title">Gabriel Chouinard-Letourneau</ThemedText>
             <HelloWave />
+
+
         </ThemedView>
+
+        <Image
+            source={require('@/assets/images/gcl.jpg')}
+            style={styles.gcl}
+        />
 
         <ThemedView style={styles.stepContainer}>
             <ThemedText type="subtitle">Mobile Developer focused on maintainability and scalability</ThemedText>
@@ -39,12 +43,15 @@ export default function HomeScreen() {
         <ThemedView style={styles.stepContainer}>
 
         <ThemedText type="subtitle">Tech Stack</ThemedText>
-            <ThemedList items={techStack} numColumns={isLargeScreen ? 5 : 3} style={styles.listStyle} />
+            <ThemedList items={techStack} style={styles.listStyle} />
         </ThemedView>
 
         <ThemedView style={styles.stepContainer}>
             <ThemedText type="subtitle">Skills</ThemedText>
-            <ThemedList items={skills} numColumns={isLargeScreen ? 5 : 2} style={styles.listStyle} />
+            <ThemedList 
+                items={skills} 
+                style={styles.listStyle} 
+            />
         </ThemedView>
 
         <ThemedView style={styles.stepContainer}>
@@ -88,17 +95,19 @@ const styles = StyleSheet.create({
         gap: 8,
         marginBottom: 8,
     },
-    reactLogo: {
-        height: 300,
-        width: 300,
-        bottom: 0,
-        left: 0,
+    headerImage: {
+        color: '#808080',
+        bottom: -90,
+        left: -35,
         position: 'absolute',
     },
+    gcl: {
+        height: 200,
+        width: 200,
+        borderRadius: 100,
+    },
     listStyle: {
-        fontWeight: '500',
         height: 50,
-        width: 100,
         display: 'flex',
         justifyContent: 'space-between',
     },

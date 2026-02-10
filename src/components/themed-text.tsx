@@ -17,7 +17,7 @@ export function ThemedText({
   ...rest
 }: ThemedTextProps) {
   const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
-  const isLargeScreen = useIsLargeScreen();
+  const { isBigScreen, isLargeScreen, isMediumScreen, isSmallScreen } = useIsLargeScreen();
 
   return (
     <Text
@@ -28,7 +28,7 @@ export function ThemedText({
         type === 'defaultSemiBold' ? styles.defaultSemiBold : undefined,
         type === 'subtitle' ? styles.subtitle : undefined,
         type === 'link' ? styles.link : undefined,
-        !isLargeScreen && (type === 'default' || type === 'defaultSemiBold') ? { fontSize: 14, fontWeight: '400' } : undefined,
+        (isMediumScreen || isSmallScreen) && (type === 'default' || type === 'defaultSemiBold') ? { fontSize: 14, fontWeight: '400' } : undefined,
         style,
       ]}
       {...rest}

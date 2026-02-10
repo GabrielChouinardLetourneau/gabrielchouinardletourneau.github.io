@@ -1,13 +1,12 @@
-import { DimensionValue, StyleSheet, TextStyle, View, ViewProps } from 'react-native';
+import { StyleSheet, TextStyle, View, ViewProps } from 'react-native';
 
 import { ThemedText } from '@/src/components/themed-text';
-import { useThemeColor } from '@/src/data/hooks/use-theme-color';
+import { useColorScheme } from '@/src/data/hooks/use-color-scheme.web';
 
 export type ThemedListProps = ViewProps & {
   items: string[];
   lightColor?: string;
   darkColor?: string;
-  numColumns?: number;
   type?: 'default' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link';
   style?: TextStyle;
 };
@@ -17,14 +16,12 @@ export function ThemedList({
   style,
   lightColor,
   darkColor,
-  numColumns = 1,
   type = 'default',
   items,
   ...rest
 }: ThemedListProps) {
-  const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
-  const itemWidth = `${100 / numColumns}%`; 
-
+  const colorScheme = useColorScheme();
+  
   return (
     <View
       style={styles.container}
@@ -34,7 +31,7 @@ export function ThemedList({
         <ThemedText
           key={index}
           type={type}
-          style={[styles.item, style, { width: itemWidth as DimensionValue }]}
+          style={[styles.item, style, { backgroundColor: colorScheme === 'dark' ? '#FFF' : '#000', color: colorScheme === 'dark' ? '#000' : '#FFF' }]}
         >
           {item}
         </ThemedText>
@@ -51,8 +48,12 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   item: {
+    width: 'auto',
     alignItems: 'center',
     marginHorizontal: 7,
     marginVertical: 4,
+    padding: 10,
+    borderWidth: 1,
+    borderRadius: 15,
   },
 });
