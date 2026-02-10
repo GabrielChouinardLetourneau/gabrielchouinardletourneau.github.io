@@ -1,6 +1,7 @@
 import { StyleSheet, Text, type TextProps } from 'react-native';
 
-import { useThemeColor } from '@/hooks/use-theme-color';
+import { useIsLargeScreen } from '@/src/data/hooks/use-different-screens';
+import { useThemeColor } from '@/src/data/hooks/use-theme-color';
 
 export type ThemedTextProps = TextProps & {
   lightColor?: string;
@@ -16,6 +17,7 @@ export function ThemedText({
   ...rest
 }: ThemedTextProps) {
   const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
+  const isLargeScreen = useIsLargeScreen();
 
   return (
     <Text
@@ -26,6 +28,7 @@ export function ThemedText({
         type === 'defaultSemiBold' ? styles.defaultSemiBold : undefined,
         type === 'subtitle' ? styles.subtitle : undefined,
         type === 'link' ? styles.link : undefined,
+        !isLargeScreen && (type === 'default' || type === 'defaultSemiBold') ? { fontSize: 14, fontWeight: '400' } : undefined,
         style,
       ]}
       {...rest}
