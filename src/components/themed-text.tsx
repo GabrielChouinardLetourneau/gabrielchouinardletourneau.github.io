@@ -6,7 +6,7 @@ import { useThemeColor } from '@/src/data/hooks/use-theme-color';
 export type ThemedTextProps = TextProps & {
   lightColor?: string;
   darkColor?: string;
-  type?: 'default' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link';
+  type?: 'default' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link' | 'button';
 };
 
 export function ThemedText({
@@ -17,7 +17,7 @@ export function ThemedText({
   ...rest
 }: ThemedTextProps) {
   const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
-  const { isBigScreen, isLargeScreen, isMediumScreen, isSmallScreen } = useIsLargeScreen();
+  const { isMediumScreen, isSmallScreen } = useIsLargeScreen();
 
   return (
     <Text
@@ -60,4 +60,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#0a7ea4',
   },
+  button: {
+    alignItems: 'center', 
+    color: '#fff',
+    lineHeight: 12
+  }
 });

@@ -58,11 +58,11 @@ const downloadAndOpenPDF = async () => {
   }
 };
 
-const DownloadResumeButton = (isLargeScreen: boolean) => {
+const DownloadResumeButton = (isLargeScreen: boolean, isSmallOrMediumScreen: boolean) => {
 
   return (
     <TouchableOpacity onPress={downloadAndOpenPDF} style={[styles.webDownloadButton, isLargeScreen ? styles.pushDownloadButton : styles.mobileDownloadButton]}>
-      <ThemedText style={styles.downloadButtonText}>Download Resume</ThemedText>
+      <ThemedText style={[styles.downloadButtonText, isSmallOrMediumScreen ? { lineHeight: 16, textAlign: 'center' } : undefined]}>Download resume</ThemedText>
     </TouchableOpacity>
   )
 }
@@ -70,7 +70,7 @@ const DownloadResumeButton = (isLargeScreen: boolean) => {
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-  const { isLargeScreen, isBigScreen } = useIsLargeScreen();
+  const { isLargeScreen, isBigScreen, isMediumScreen, isSmallScreen } = useIsLargeScreen();
   const [fontsLoaded] = useFonts({
     ...Ionicons.font,
   });
@@ -111,7 +111,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="download"
         options={{
-          tabBarButton: () => DownloadResumeButton(isLargeScreen),
+          tabBarButton: () => DownloadResumeButton(isLargeScreen, (isMediumScreen || isSmallScreen)),
         }}
         listeners={{
           tabPress: (e) => {
@@ -143,8 +143,10 @@ const styles = StyleSheet.create({
   },
   downloadButtonText: {
     color: 'white',
-    fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: 'bold'
+  },
+  downloadButtonMobileText: {
+    textAlign: 'center'
   },
   pushDownloadButton: {
     flexGrow: 1,

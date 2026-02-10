@@ -1,3 +1,4 @@
+import { useIsLargeScreen } from "@/src/data/hooks/use-different-screens";
 import { ButtonProps, StyleSheet, TouchableOpacity } from "react-native";
 import { ThemedText } from "./themed-text";
 
@@ -15,11 +16,12 @@ export function ThemedButton({
     lightColor,
     darkColor,
     ...rest }: ThemedButtonProps) { 
+    const { isMediumScreen, isSmallScreen } = useIsLargeScreen();
 
 
     return (        
         <TouchableOpacity onPress={onPress} style={styles.button} {...rest}>
-            <ThemedText type="defaultSemiBold" style={{ alignItems: 'center', color: '#fff' }}>
+            <ThemedText type="button">
                 {title}
             </ThemedText>
         </TouchableOpacity>
