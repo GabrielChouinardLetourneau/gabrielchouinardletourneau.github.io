@@ -13,6 +13,7 @@
     "predeploy": "expo export -p web"
   },
   "dependencies": {
+    "@expo/metro-config": "~54.0.14",
     "@expo/vector-icons": "^15.0.3",
     "@react-native-vector-icons/material-icons": "^12.4.0",
     "@react-navigation/bottom-tabs": "^7.4.0",
