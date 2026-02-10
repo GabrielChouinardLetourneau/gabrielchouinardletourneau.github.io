@@ -17,6 +17,7 @@ export default function HomeScreen() {
         ...Ionicons.font,
     });
     const colorScheme = useColorScheme();
+    
     return (
     <ParallaxScrollView
         headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}

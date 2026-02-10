@@ -74,6 +74,7 @@ export default function TabLayout() {
   const [fontsLoaded] = useFonts({
     ...Ionicons.font,
   });
+
   return (
     <Tabs
       screenOptions={{
