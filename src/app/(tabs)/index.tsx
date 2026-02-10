@@ -1,5 +1,5 @@
 import { Image } from 'expo-image';
-import { ActivityIndicator, StyleSheet, useColorScheme } from 'react-native';
+import { StyleSheet, useColorScheme } from 'react-native';
 
 import { ExternalLink } from '@/src/components/external-link';
 import { HelloWave } from '@/src/components/hello-wave';
@@ -9,20 +9,16 @@ import { ThemedText } from '@/src/components/themed-text';
 import { ThemedView } from '@/src/components/themed-view';
 import { skills, techStack } from '@/src/constants/general';
 import { Ionicons } from '@expo/vector-icons';
-import { useFonts } from 'expo-font';
 import { Link } from 'expo-router';
 
 export default function HomeScreen() {
-    const [fontsLoaded] = useFonts({
-        ...Ionicons.font,
-    });
     const colorScheme = useColorScheme();
     
     return (
     <ParallaxScrollView
         headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
         headerImage={
-            fontsLoaded ? <Ionicons name="person" size={310} style={styles.headerImage}/> : <ActivityIndicator style={styles.headerImage} />    
+            <Ionicons name="person" size={310} style={styles.headerImage}/>
         }>
         <ThemedView style={styles.titleContainer}>
             <ThemedText type="title">Gabriel Chouinard-Letourneau</ThemedText>
@@ -60,7 +56,7 @@ export default function HomeScreen() {
         <ThemedView style={styles.stepContainer}>
             <ThemedText type="subtitle">Contact</ThemedText>
             <ThemedText style={styles.contactContainer}>
-                {fontsLoaded ? <Ionicons name="at" color={colorScheme === 'dark' ? '#FFFFFF' : '#000000'} size={32} /> : <ActivityIndicator size={32} />}
+                <Ionicons name="at" color={colorScheme === 'dark' ? '#FFFFFF' : '#000000'} size={32} />
                 <ThemedText type="link" style={styles.linkContactContainer}>  
                     <Link href="mailto:chouinardletourneaug@gmail.com" style={styles.linkContact}>
                         chouinardletourneaug@gmail.com
@@ -76,6 +72,18 @@ export default function HomeScreen() {
                 </ThemedText>
             </ThemedText>
         </ThemedView>
+
+        <ThemedView style={styles.stepContainer}>
+            <ThemedText type="subtitle">Coming soon on </ThemedText>
+
+            <ThemedText style={styles.comingSoonContainer}>
+                <ThemedView style={[styles.googlePlayLogoContainer, { backgroundColor: colorScheme === 'dark' ? '#FFFFFF' : undefined}]}>
+                    <Image source={require('@/assets/images/google-play.png')} style={styles.googlePlayLogo} />
+                </ThemedView>
+                <Image source={require('@/assets/images/app-store.png')} style={styles.appStoreLogo} />
+            </ThemedText>
+        </ThemedView>
+
 
         <ThemedView style={styles.poweredByContainer}>
             <ThemedText type="subtitle">Powered by</ThemedText>
@@ -131,6 +139,23 @@ const styles = StyleSheet.create({
     logo: {
         width: 32,
         height: 32,
+    },
+    comingSoonContainer: {
+        width: 'auto'
+    },
+    googlePlayLogoContainer: {
+        marginRight: 20,
+        borderRadius: 10,
+        padding: 5
+    },
+    googlePlayLogo: {
+        width: 253,
+        height: 50,
+    
+    },
+    appStoreLogo: {
+        width: 50,
+        height: 50
     },
     poweredByContainer: {
         marginTop: 100,

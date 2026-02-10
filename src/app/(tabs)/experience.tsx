@@ -9,21 +9,18 @@ import { Fonts } from '@/src/constants/theme';
 import { useIsLargeScreen } from '@/src/data/hooks/use-different-screens';
 import { useToggleModal } from '@/src/data/hooks/use-toggle-modal';
 import { Ionicons } from '@expo/vector-icons';
-import { useFonts } from 'expo-font';
-import { ActivityIndicator, ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 
 export default function AboutScreen() {
   const { open, close, modalVisible, modalData } = useToggleModal();
   const { isLargeScreen, isBigScreen } = useIsLargeScreen();
-  const [fontsLoaded] = useFonts({
-    ...Ionicons.font,
-  });
+
 
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
       headerImage={
-        fontsLoaded ? <Ionicons name="briefcase" size={310} style={styles.headerImage} /> : <ActivityIndicator style={styles.headerImage} />   
+        <Ionicons name="briefcase" size={310} style={styles.headerImage} />  
       }
     >
       <ThemedView style={isLargeScreen ? styles.webContainer : styles.mobileContainer}>

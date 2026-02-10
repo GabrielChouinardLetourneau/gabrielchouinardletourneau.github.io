@@ -1,3 +1,4 @@
+import { useFonts } from 'expo-font';
 import { Redirect } from 'expo-router';
 import { useEffect, useRef, useState } from 'react';
 import { Animated, StyleSheet, Text } from "react-native";
@@ -5,7 +6,9 @@ import { Animated, StyleSheet, Text } from "react-native";
 export default function Index() {
   const fadeAnim = useRef(new Animated.Value(0)).current; // Initial opacity: 0
   const [isReady, setIsReady] = useState(false);
-  
+  const [fontsLoaded] = useFonts({
+    Ionicons: require('@/assets/fonts/Ionicons.ttf'),
+  });
     useEffect(() => {
       Animated.sequence([
         // Phase 1: Fade In
@@ -28,7 +31,7 @@ export default function Index() {
     }, []);
     
   return (
-    !isReady ? (
+    !isReady && !fontsLoaded ? (
       <Animated.View style={[styles.container, { opacity: fadeAnim }]}>
         <Text style={styles.welcomeText}>Welcome to my portfolio!</Text>
       </Animated.View>
