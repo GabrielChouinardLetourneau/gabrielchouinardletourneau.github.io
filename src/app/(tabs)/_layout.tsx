@@ -72,7 +72,7 @@ export default function TabLayout() {
   const colorScheme = useColorScheme();
   const { isLargeScreen, isBigScreen } = useIsLargeScreen();
   const [fontsLoaded] = useFonts({
-    Ionicons: require('@/assets/fonts/Ionicons.ttf'),
+    ...Ionicons.font,
   });
   return (
     <Tabs
