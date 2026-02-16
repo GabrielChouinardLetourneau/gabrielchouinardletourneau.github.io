@@ -107,7 +107,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="download"
+        name="action-button"
         options={{
           tabBarButton: () => DownloadResumeButton(isLargeScreen, (isMediumScreen || isSmallScreen)),
         }}

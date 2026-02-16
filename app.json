@@ -23,7 +23,6 @@
     },
     "web": {
       "output": "static",
-      "name": "Gabriel Chouinard-Letourneau",
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
