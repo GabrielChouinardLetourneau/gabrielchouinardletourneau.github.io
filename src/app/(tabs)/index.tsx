@@ -78,7 +78,7 @@ export default function HomeScreen() {
                 </ThemedView>
 
                 <ThemedView style={styles.stepContainer}>
-                    <ThemedText type="subtitle">Coming soon on </ThemedText>
+                    <ThemedText type="subtitle">Coming soon</ThemedText>
 
                     <ThemedText style={styles.comingSoonContainer}>
                         <ThemedView style={[styles.googlePlayLogoContainer, { backgroundColor: colorScheme === 'dark' ? '#FFFFFF' : undefined}]}>

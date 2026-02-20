@@ -6,7 +6,7 @@ export function useToggleModal() {
     const [modalData, setModalData] = useState({} as ProjectData);
 
     const open = (data: ProjectData) => {
-        setModalData(data);
+        setModalData(prev => prev = data);
         setModalVisible(true);
     };
 

@@ -9,7 +9,8 @@ import {
     StyleSheet,
     Text,
     TouchableOpacity,
-    View,
+    TouchableWithoutFeedback,
+    View
 } from 'react-native';
 
 interface ProjectModalProps {
@@ -27,6 +28,8 @@ export interface ProjectData {
     androidLink?: ExternalPathString;
     iosLink?: ExternalPathString;
     caseStudyLink?: ExternalPathString;
+    prLink?: ExternalPathString;
+    commitsLink?: ExternalPathString;
 }
 
 export const ProjectModal = (
@@ -34,70 +37,83 @@ export const ProjectModal = (
     const isLargeScreen = useIsLargeScreen();
 
     return (
-        <Modal
-            visible={visible}
-            transparent
-            animationType="fade"
-            onRequestClose={close}
-        >
-            <View style={styles.overlay}>
-                <View style={styles.container}>
-                    <TouchableOpacity style={styles.closeButton} onPress={close}>
-                        <Text style={styles.closeText}>✕</Text>
-                    </TouchableOpacity>
+        <TouchableWithoutFeedback onPress={() => close()}>
+            <Modal
+                visible={visible}
+                transparent
+                animationType="fade"
+                onRequestClose={close}
+            >
+                    <View style={styles.overlay}>
+                        <View style={styles.container}>
+                            <TouchableOpacity style={styles.closeButton} onPress={close}>
+                                <Text style={styles.closeText}>✕</Text>
+                            </TouchableOpacity>
 
-                    <ScrollView contentContainerStyle={styles.content}>
-                        <Text style={styles.title}>{data.title}</Text>
-                        <Text style={styles.description}>{data.description}</Text>
-                        {data.secondaryDescription && (
-                            <Text style={styles.description}>{data.secondaryDescription}</Text>
-                        )}
+                            <ScrollView contentContainerStyle={styles.content}>
+                                <Text style={styles.title}>{data.title}</Text>
+                                <Text style={styles.description}>{data.description}</Text>
+                                {data.secondaryDescription && (
+                                    <Text style={styles.description}>{data.secondaryDescription}</Text>
+                                )}
 
-                        {data.technologies && data.technologies.length > 0 && (
-                            <View style={styles.technologiesContainer}>
-                                <Text style={styles.technologiesTitle}>Technologies</Text>
-                                <View style={styles.tagContainer}>
-                                    {data.technologies.map((tech, index) => (
-                                        <View key={index} style={styles.tag}>
-                                            <Text style={styles.tagText}>{tech}</Text>
+                                {data.technologies && data.technologies.length > 0 && (
+                                    <View style={styles.technologiesContainer}>
+                                        <Text style={styles.technologiesTitle}>Technologies</Text>
+                                        <View style={styles.tagContainer}>
+                                            {data.technologies.map((tech, index) => (
+                                                <View key={index} style={styles.tag}>
+                                                    <Text style={styles.tagText}>{tech}</Text>
+                                                </View>
+                                            ))}
                                         </View>
-                                    ))}
+                                    </View>
+                                )}
+
+                                {data.imageSrc && (
+                                    <View style={styles.imageContainer}>
+                                        <Image
+                                            source={data.imageSrc}
+                                            style={{...styles.image, height: isLargeScreen ? 500 : 200 }}
+                                        />
+                                    </View>
+                                )}
+
+                                {/* Links */}
+                                <View style={styles.linksContainer}>
+                                    {data.androidLink && (
+                                        <ExternalLink href={data.androidLink} style={[styles.externalLink, styles.androidLink]}>
+                                            View on Google Play
+                                        </ExternalLink>
+                                    )}
+                                    {data.iosLink && (
+                                        <ExternalLink href={data.iosLink} style={[styles.externalLink, styles.iosLink]}>
+                                            View on App Store
+                                        </ExternalLink>
+                                    )}
+                                    {data.caseStudyLink && (
+                                        <ExternalLink href={data.caseStudyLink} style={styles.externalLink}>
+                                            Read Case Study
+                                        </ExternalLink>
+                                    )}
+                                    {data.prLink && (
+                                        <ExternalLink href={data.prLink} style={styles.externalLink}>
+                                            PR contributions
+                                        </ExternalLink>
+                                    )}
+                                    {data.commitsLink && (
+                                        <ExternalLink href={data.commitsLink} style={styles.externalLink}>
+                                            Commits contributions
+                                        </ExternalLink>
+                                    )}
                                 </View>
-                            </View>
-                        )}
 
-                        {data.imageSrc && (
-                            <View style={styles.imageContainer}>
-                                <Image
-                                    source={data.imageSrc}
-                                    style={{...styles.image, height: isLargeScreen ? 500 : 200 }}
-                                />
-                            </View>
-                        )}
-
-                        {/* Links */}
-                        <View style={styles.linksContainer}>
-                            {data.androidLink && (
-                                <ExternalLink href={data.androidLink} style={[styles.externalLink, styles.androidLink]}>
-                                    View on Google Play
-                                </ExternalLink>
-                            )}
-                            {data.iosLink && (
-                                <ExternalLink href={data.iosLink} style={[styles.externalLink, styles.iosLink]}>
-                                    View on App Store
-                                </ExternalLink>
-                            )}
-                            {data.caseStudyLink && (
-                                <ExternalLink href={data.caseStudyLink} style={styles.externalLink}>
-                                    Read Case Study
-                                </ExternalLink>
-                            )}
+                            </ScrollView>
                         </View>
+                    </View>
 
-                    </ScrollView>
-                </View>
-            </View>
-        </Modal>
+            </Modal>
+        </TouchableWithoutFeedback>
     );
 };
 

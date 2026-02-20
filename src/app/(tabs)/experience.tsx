@@ -10,7 +10,7 @@ import { Fonts } from '@/src/constants/theme';
 import { useIsLargeScreen } from '@/src/data/hooks/use-different-screens';
 import { useToggleModal } from '@/src/data/hooks/use-toggle-modal';
 import { Ionicons } from '@expo/vector-icons';
-import { ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 
 export default function AboutScreen() {
   const { open, close, modalVisible, modalData } = useToggleModal();
@@ -59,7 +59,9 @@ export default function AboutScreen() {
               ))}
 
             </ThemedView>
-            <ProjectModal visible={modalVisible} data={modalData} close={close} />
+            <TouchableWithoutFeedback>
+                <ProjectModal visible={modalVisible} data={modalData} close={() => close()} />
+            </TouchableWithoutFeedback>
           </ScrollView>
         </ThemedView>
       </ParallaxScrollView>
