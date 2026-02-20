@@ -45,6 +45,13 @@
       "typedRoutes": true,
       "reactCompiler": true,
       "baseUrl": ""
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "90b3a840-c0db-48b2-b26c-7d03fe8445f2"
+      }
+    },
+    "owner": "gab_cl"
   }
 }
