@@ -4,6 +4,8 @@ on:
     push:
         branches:
             - main
+    workflow_dispatch: # Allows manual triggering from the GitHub Actions tab
+
 
 jobs:
     deploy:
@@ -14,7 +16,7 @@ jobs:
             id-token: write
 
         steps:
-            - name: Checkout code
+            - name: Checkout repo
               uses: actions/checkout@v4
 
             - name: Setup Node.js
@@ -22,8 +24,24 @@ jobs:
               with:
                 node-version: '24'
 
+            - name: Setup Expo
+              uses: expo/expo-github-action@v8
+              with:
+                expo-version: latest
+                token: ${{ secrets.EXPO_TOKEN }}
+            
             - name: Install dependencies
               run: npm install
 
-            - name: Deploy
-              run: npm run deploy
+            - name: Export the web app static bundle
+              run: npx expo export -p web
+              # The output is placed in the 'dist' directory by default.
+
+            - name: Deploy to GitHub Pages (Example step, adjust as needed)
+              # This step depends on your hosting provider. For GitHub Pages, you might use a specific action.
+              # Example using a popular action to deploy the 'dist' folder:
+              uses: peaceiris/actions-gh-pages@v3
+              if: ${{ github.ref == 'refs/heads/main' }} # Only deploy from main branch
+              with:
+                github_token: ${{ secrets.GITHUB_TOKEN }}
+                publish_dir: ./dist # Directory containing the static files
